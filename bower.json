@@ -1,0 +1,7 @@
+{
+  "name": "chamber",
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "magnific-popup": "^1.1.0"
+  }
+}
