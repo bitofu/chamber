@@ -1,8 +1,10 @@
 var gulp = require('gulp');
+var mainBowerFiles = require('main-bower-files');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
-var cssmin = require('gulp-cssmin');
+var cleanCSS = require('gulp-clean-css');
+var urlAdjuster = require('gulp-css-url-adjuster');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
@@ -33,7 +35,8 @@ gulp.task('vendor', function() {
   return gulp.src([
     'bower_components/jquery/dist/jquery.js',
     'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-    'node_modules/semantic-ui/dist/semantic.js'
+    'bower_components/semantic/dist/semantic.js',
+    'bower_components/toastr/toastr.js'
   ]).pipe(concat('vendor.js'))
     .pipe(gulpif(production, uglify({ mangle: false })))
     .pipe(gulp.dest('public/js'));
@@ -111,13 +114,29 @@ gulp.task('styles', function() {
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(gulpif(production, cssmin()))
+    .pipe(gulpif(production, cleanCSS()))
+    .pipe(urlAdjuster({ replace: ['../../themes/default/assets/', '../'] }))
     .pipe(gulp.dest('public/css'));
+});
+
+/*
+ |--------------------------------------------------------------------------
+ | Pipe icons and flags.
+ |--------------------------------------------------------------------------
+ */
+gulp.task('fonts', function() {
+  return gulp.src(mainBowerFiles())
+    .pipe(gulp.dest('public/fonts'));
+});
+
+gulp.task('images', function() {
+  return gulp.src('bower_components/semantic/dist/themes/default/assets/images/*.png')
+    .pipe(gulp.dest('public/images'));
 });
 
 gulp.task('watch', function() {
   gulp.watch('app/stylesheets/**/*.less', ['styles']);
 });
 
-gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
+gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'fonts', 'images', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
