@@ -26,7 +26,7 @@ router.post('/new_user', function(req, res, next) {
         });
         user.save(function(err) {
           if (err) return next(err);
-          res.send({ message: 'Registration successful' });
+          res.send({ message: 'Registration successful. Welcome to chamber, ' + user.firstName + '!' });
         });
       } catch (error) {
         res.status(404).send({ message: 'An error occured, please try refreshing the page and registering again' })

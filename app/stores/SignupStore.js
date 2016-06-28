@@ -4,13 +4,12 @@ import SignupActions from '../actions/SignupActions';
 class SignupStore {
   constructor() {
     this.bindActions(SignupActions);
-    this.email = 'test@gmail.com';
-    this.password = 'asdfasdf1';
-    this.firstName = 'test';
-    this.lastName = 'test';
-    this.city = 'Vancouver';
-    this.country = 'ca';
-    this.messageData = {};
+    this.email = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.city = '';
+    this.country = '';
   };
 
   onUpdateEmail(event) {
@@ -19,7 +18,6 @@ class SignupStore {
 
   onUpdatePassword(event) {
     this.password = event.target.value;
-    console.log(this.password)
   };
 
   onUpdateFirstName(event) {
@@ -32,7 +30,6 @@ class SignupStore {
 
   onUpdateCity(event) {
     this.city = event.target.value;
-    console.log(this.city)
   };
 
   onUpdateCountry(event) {
@@ -40,12 +37,12 @@ class SignupStore {
   };
 
   onCreateUserSuccess(data) {
-    data.props.history.pushState('/')
+    toastr.success(data.message);
+    data.history.pushState('/');
   };
 
   onCreateUserFail(data) {
-    console.log(data.history)
-    toastr.error(data.message)
+    toastr.error(data.message);
   };
 
 };

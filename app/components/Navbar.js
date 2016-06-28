@@ -13,9 +13,6 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     NavbarStore.listen(this.onChange);
-
-    $('.ui.dropdown').dropdown();
-    $('#show-login').popup({ hoverable: true, position: 'bottom right' });
   };
 
   componentWillUnmount() {
@@ -45,10 +42,6 @@ class Navbar extends React.Component {
                 <i className="search link icon" />
               </div>
             </div>
-            <a id='show-login' className='item'>
-              Login
-              <i className='dropdown icon' />
-            </a>
             <Login />
           </div>
         </div>

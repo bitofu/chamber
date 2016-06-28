@@ -94,7 +94,6 @@ class Signup extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.props)
     if ($('#signup-form').form('is valid')) {
       let email = this.state.email.trim();
       let password = this.state.password.trim();

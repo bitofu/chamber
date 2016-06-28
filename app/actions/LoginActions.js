@@ -10,15 +10,15 @@ class LoginActions {
     );
   };
 
-  loginUser(email, password, props) {
+  loginUser(email, password, history) {
     $.ajax({
       type: 'GET',
       url: '/login',
       data: { email: email, password: password }
     }).done((res) => {
-      this.actions.loginUserSuccess({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, props: props })
+      this.actions.loginUserSuccess({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, history: history })
     }).fail((res) => {
-      this.actions.loginUserFail({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, props: props })
+      this.actions.loginUserFail({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, history: history })
     });
   };
 
