@@ -109,7 +109,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className='ten wide column'>
+      <div className=''>
         <form id='signup-form' className='ui form' onSubmit={this.handleSubmit.bind(this)}>
           <h3 className="ui dividing header">Registration Form</h3>
           <div className='required field'>
@@ -400,7 +400,9 @@ class Signup extends React.Component {
               <label>I agree to the <Link to='/'>terms and conditions</Link>.</label>
             </div>
           </div>
-          <button type='submit' className='ui primary button'>Register</button>
+          <div className='row'>
+            <button type='submit' className='ui primary button'>Register</button>
+          </div>
         </form>
       </div>
     );

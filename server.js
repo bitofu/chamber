@@ -9,11 +9,14 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
 
-var config = require('./config');
-
 var express = require('express');
 var app = express();
+var passport = require('passport');
+
 var swig  = require('swig');
+
+var config = require('./config/config');
+require('./config/passport')(passport);
 
 // Socket.io stuff
 var server = require('http').createServer(app);
@@ -32,6 +35,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // route logic
 app.use(require('./controllers'))

@@ -13,8 +13,8 @@ class Login extends React.Component {
   componentDidMount() {
     LoginStore.listen(this.onChange);
 
-    $('#login-popup').popup({
-      hoverable: true,
+    $('#login-popup a').popup({
+      on: 'click',
       inline: true,
       position: 'bottom right'
     });
@@ -55,7 +55,6 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('submitting')
     if ($('#login-form').form('is valid')) {
       var email = this.state.email.trim();
       var password = this.state.password.trim();
@@ -66,18 +65,12 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className=''>
-        <a id='login-popup' className='item'>
+      <div id='login-popup'>
+        <a className='item'>
           Login
           <i className='dropdown icon' />
         </a>
-        <div className='ui fluid popup'>
-          Testeststs
-        </div>
-      </div>
-      /*
-      <div id='login-popup' className='ui fluid popup'>
-        <div className='' data-variation='tiny'>
+        <div className='ui popup'>
           <form id='login-form' className='ui form' onSubmit={this.handleSubmit.bind(this)}>
             <h3 className="ui dividing header">Log in as:</h3>
             <div className='field'>
@@ -88,14 +81,18 @@ class Login extends React.Component {
               <label>Password</label>
               <input type='password' name='password' placeholder='********' value={this.state.password} onChange={LoginActions.updatePassword} />
             </div>
-            <button type='submit' className='ui primary button'>Log in</button>
+            <div className='ui middle aligned two column grid'>
+              <div className='column'>
+                <button type='submit' className='ui fluid primary button'>Log in</button>
+              </div>
+              <div className='column center aligned'>
+                Or <Link to='/signup' onClick={LoginActions.popupHide}>Sign up</Link>!
+              </div>
+            </div>
           </form>
-          <Link to='/signup'>
-            Sign up
-          </Link>
         </div>
+
       </div>
-      */
     );
   };
 
