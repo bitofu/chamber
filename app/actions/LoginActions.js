@@ -13,7 +13,7 @@ class LoginActions {
   loginUser(email, password, history) {
     $.ajax({
       type: 'GET',
-      url: '/login/new_session',
+      url: '/login',
       data: { email: email, password: password }
     }).done((res) => {
       this.actions.loginUserSuccess({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, history: history })

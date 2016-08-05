@@ -18,6 +18,7 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, done) {
+    console.log('employing local-signup')
     process.nextTick(function() {
       User.findOne({'local.email': email}, function(err, user) {
         if (err) return done(err);
@@ -43,11 +44,14 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, done) {
-    User.findOne({'local.email': email}, function(err, user) {
-      if (err) return done(err);
-      if (!user) return done(null, false, res.send({message: 'No such user found.'}));
-      if (!user.validatePassword(password)) return done(null, false, res.send({message: 'Oops! Wrong password.'}));
-      return done(null, user);
+    console.log('employing local-login')
+    process.nextTick(function() {
+      User.findOne({'local.email': email}, function(err, user) {
+        if (err) return done(err);
+        if (!user) return done(null, false, res.send({message: 'No such user found.'}));
+        if (!user.validatePassword(password)) return done(null, false, res.send({message: 'Oops! Wrong password.'}));
+        return done(null, user);
+      });
     });
   }));
 

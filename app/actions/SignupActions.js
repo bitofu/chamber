@@ -22,7 +22,7 @@ class SignupActions {
     }).done((res) => {
         this.actions.createUserSuccess({ message: res.responseJSON.message, history: history });
       }).fail((res) => {
-        this.actions.createUserSuccess({ message: res.responseJSON.message, history: history });
+        this.actions.createUserFail({ message: res.responseJSON.message, history: history });
       });
   };
 

@@ -10,12 +10,10 @@ class LoginStore {
 
   onUpdateEmail(event) {
     this.email = event.target.value;
-    console.log(this.email)
   };
 
   onUpdatePassword(event) {
     this.password = event.target.value;
-    console.log(this.password)
   }
 
   onLoginUserSuccess(data) {
