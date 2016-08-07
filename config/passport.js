@@ -17,22 +17,31 @@ module.exports = function(passport) {
     passwordField: 'password',
     passReqToCallback: true
   },
-  function(req, email, password, done) {
+  function(req, done) {
     console.log('employing local-signup')
     process.nextTick(function() {
       User.findOne({'local.email': email}, function(err, user) {
         if (err) return done(err);
         if (user) {
-          return done(null, false, res.send({ message: err.message }));
+          return res.status(409).send({ message: user.email + ' is already registered' });
         } else {
-          var newUser = new User();
-          newUser.local.email = email;
-          newUser.local.password = password;
-
-          newUser.save(function(err) {
-            if (err) throw err;
-            return done(null, newUser);
-          });
+          try {
+            var user = new User({
+              email: req.body.email,
+              password: req.body.password,
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              city: req.body.city,
+              country: req.body.country
+            });
+            user.save(function(err) {
+              if (err) return done(err);
+              res.send({ message: 'Registration successful. Welcome to chamber, ' + user.firstName + '!' });
+              return done(null, user);
+            });
+          } catch (error) {
+            res.status(404).send({ message: 'An error occured, please try refreshing the page and registering again' })
+          };
         };
       });
     });
@@ -44,8 +53,8 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, done) {
-    console.log('employing local-login')
     process.nextTick(function() {
+      console.log('employing local-login')
       User.findOne({'local.email': email}, function(err, user) {
         if (err) return done(err);
         if (!user) return done(null, false, res.send({message: 'No such user found.'}));

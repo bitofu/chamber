@@ -20,8 +20,10 @@ class SignupActions {
       url: '/signup/new_user',
       data: { email: email, password: password, firstName: firstName, lastName: lastName, city: city, country: country }
     }).done((res) => {
-        this.actions.createUserSuccess({ message: res.responseJSON.message, history: history });
+        console.log(res)
+        this.actions.createUserSuccess({ message: res.message, history: history });
       }).fail((res) => {
+        console.log(res)
         this.actions.createUserFail({ message: res.responseJSON.message, history: history });
       });
   };

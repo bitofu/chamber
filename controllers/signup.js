@@ -1,8 +1,19 @@
+var passport = require('passport');
 var router = require('express').Router();
 var User = require('../models/user');
+require('../config/passport')(passport);
+
+router.post('/', function(req, res, next) {
+  console.log('this is here')
+  passport.authenticate('local', function(err, user, info) {
+    if (err) return next(err);
+    if (!user) return res.status(409).send({ message: user.email + ' is not a user.' });
+  })
+});
 
 // POST create new user
 router.post('/new_user', function(req, res, next) {
+  console.log(passport)
   var email = req.body.email;
   var password = req.body.password;
   var firstName = req.body.firstName;

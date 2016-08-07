@@ -17,7 +17,7 @@ var session = require('express-session');
 var swig  = require('swig');
 
 var configDB = require('./config/database');
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
 // Socket.io stuff
 var server = require('http').createServer(app);
@@ -35,14 +35,19 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
-app.use(session({secret: 'mySecretKey'}));
+app.use(session({
+  secret: 'mySecretKey',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport')(passport);
 
 // route logic
 app.use(require('./controllers'));
+// require('./controllers')(app, passport);
 
 app.use(function(req, res) {
   Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {

@@ -139,7 +139,7 @@ class Signup extends React.Component {
             <label>Location</label>
             <div className='two fields'>
               <div className='field'>
-                <input type='text' name='city' placeholder='City' placeholder='summoner_name' value={this.state.city} onChange={SignupActions.updateCity} />
+                <input type='text' name='city' placeholder='City' placeholder='City' value={this.state.city} onChange={SignupActions.updateCity} />
               </div>
               <div className='field' onBlur={SignupActions.updateCountry} >
                 <div className='ui fluid search selection dropdown'>

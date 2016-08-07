@@ -12,11 +12,11 @@ class LoginActions {
 
   loginUser(email, password, history) {
     $.ajax({
-      type: 'GET',
+      type: 'POST',
       url: '/login',
       data: { email: email, password: password }
     }).done((res) => {
-      this.actions.loginUserSuccess({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, history: history })
+      this.actions.loginUserSuccess({ message: res.message, loggedIn: res.responseJSON.loggedIn, history: history })
     }).fail((res) => {
       this.actions.loginUserFail({ message: res.responseJSON.message, loggedIn: res.responseJSON.loggedIn, history: history })
     });

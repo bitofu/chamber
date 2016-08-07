@@ -18,11 +18,13 @@ class LoginStore {
 
   onLoginUserSuccess(data) {
     // data.props.history.pushState('/')
+    toastr.success(data.message);
     console.log(data.loggedIn)
   };
 
   onLoginUserFail(data) {
     // this.messageData = { type: 'error', header: 'There was an error in your registration.', content: data.message };
+    toastr.error(data.message);
     console.log(data.loggedIn)
   };
 
