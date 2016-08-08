@@ -1,10 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
-import auth from '../auth';
 
 class Dashboard extends React.Component {
   render() {
-    const token = auth.getToken();
+    const token = ''
 
     return (
       <div>

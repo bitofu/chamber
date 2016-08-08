@@ -25,7 +25,7 @@ class Navbar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // Search shit goes here
+    // Search magic goes here
   };
 
   render() {
@@ -34,6 +34,9 @@ class Navbar extends React.Component {
         <div className='ui secondary pointing menu'>
           <Link to='/' id='home-route' className='item'>
             Home
+          </Link>
+          <Link to='/dashboard' id='dashboard-route' className='item'>
+            Dashboard
           </Link>
           <div className='right menu'>
             <div className='item'>

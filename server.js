@@ -11,8 +11,8 @@ var cookieParser = require('cookie-parser');
 
 var express = require('express');
 var app = express();
-var passport = require('passport');
-var session = require('express-session');
+// var passport = require('passport');
+// var session = require('express-session');
 
 var swig  = require('swig');
 
@@ -37,17 +37,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
-app.use(session({
-  secret: 'mySecretKey',
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({
+//   secret: 'mySecretKey',
+//   resave: false,
+//   saveUninitialized: false
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // route logic
 app.use(require('./controllers'));
-// require('./controllers')(app, passport);
 
 app.use(function(req, res) {
   Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {

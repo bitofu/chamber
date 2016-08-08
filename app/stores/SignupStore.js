@@ -37,13 +37,11 @@ class SignupStore {
   };
 
   onCreateUserSuccess(data) {
-    console.log('success', data)
     toastr.success(data.message);
     data.history.pushState('/');
   };
 
   onCreateUserFail(data) {
-    console.log('fail', data)
     toastr.error(data.message);
   };
 
