@@ -2,6 +2,22 @@
   "name": "chamber",
   "dependencies": {
     "jquery": "^2.2.4",
-    "magnific-popup": "^1.1.0"
+    "magnific-popup": "^1.1.0",
+    "semantic": "semantic-ui#~2.1.8",
+    "toastr": "~2.1.2"
+  },
+  "overrides": {
+    "jquery": {
+      "ignore": true
+    },
+    "magnific-popup": {
+      "ignore": true
+    },
+    "semantic": {
+      "main": "dist/themes/default/assets/fonts/*"
+    },
+    "magnific-popup": {
+      "ignore": true
+    }
   }
 }
